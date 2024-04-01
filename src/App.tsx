@@ -19,12 +19,18 @@ import {
   InsertImage,
   InsertTable,
   DiffSourceToggleWrapper,
+  MDXEditorMethods,
 } from '@mdxeditor/editor'
 import '@mdxeditor/editor/style.css'
 import './App.css'
-import './themes/dark.css'
+import './themes/custom.css'
+import cssString from './themes/custom.css?raw'
+import PdfExportButton from './components/PdfExportButton'
+import { useRef } from 'react'
 
 function App() {
+  const ref = useRef<MDXEditorMethods>(null)
+
   const markdown = `
   # Items
 
@@ -41,7 +47,7 @@ function App() {
 
   return (
     <MDXEditor
-      className='dark-theme dark-editor'
+      ref={ref}
       contentEditableClassName='awesome-editor'
       markdown={markdown}
       plugins={[
@@ -65,15 +71,21 @@ function App() {
         diffSourcePlugin({ diffMarkdown: 'An older version', viewMode: 'rich-text' }),
         toolbarPlugin({
           toolbarContents: () => (
-            <DiffSourceToggleWrapper>
-              <UndoRedo />
-              <BoldItalicUnderlineToggles />
-              <ListsToggle />
-              <CodeToggle />
-              <CreateLink />
-              <InsertTable />
-              <InsertImage />
-            </DiffSourceToggleWrapper>
+            <>
+              <DiffSourceToggleWrapper>
+                <UndoRedo />
+                <BoldItalicUnderlineToggles />
+                <ListsToggle />
+                <CodeToggle />
+                <CreateLink />
+                <InsertTable />
+                <InsertImage />
+              </DiffSourceToggleWrapper>
+              <PdfExportButton
+                getMarkdown={() => ref.current?.getMarkdown() ?? ''}
+                css={cssString}
+              />
+            </>
           ),
         }),
       ]}

@@ -1,0 +1,17 @@
+h1 {
+  color: red;
+}
+
+h2 {
+  color: green;
+}
+
+ul,
+ol {
+  border: 1px solid maroon;
+}
+
+li {
+  background-color: lightgrey;
+  padding: 5px;
+}
