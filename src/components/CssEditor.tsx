@@ -14,7 +14,11 @@ const CssEditor = ({ open, css, onCssChange }: ICssEditor) => {
   const [currentCss, setCurrentCss] = useState(css)
 
   return (
-    <Drawer open={open} onClose={() => onCssChange(currentCss)} direction='bottom'>
+    <Drawer
+      open={open}
+      onClose={() => onCssChange(currentCss)}
+      direction='bottom'
+      style={{ overflowY: 'auto', padding: '10px' }}>
       <StyleEditor value={currentCss} onChange={(value: string) => setCurrentCss(value)} />
     </Drawer>
   )
