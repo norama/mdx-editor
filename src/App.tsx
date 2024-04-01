@@ -22,6 +22,7 @@ import {
 } from '@mdxeditor/editor'
 import '@mdxeditor/editor/style.css'
 import './App.css'
+import './themes/dark.css'
 
 function App() {
   const markdown = `
