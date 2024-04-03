@@ -17,6 +17,7 @@ const pdfExport = async (markdown: string, css?: string) => {
     headers: {
       'Content-Type': 'application/x-www-form-urlencoded',
     },
+    mode: 'no-cors',
     body: data,
   })
 
