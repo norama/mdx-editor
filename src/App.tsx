@@ -27,6 +27,7 @@ import defCssString from './themes/custom.css?raw'
 import PdfExportButton from './components/PdfExportButton'
 import { useRef, useState } from 'react'
 import CssEditor from 'components/CssEditor'
+import { uploadImage } from 'api/supabase'
 
 function App() {
   const ref = useRef<MDXEditorMethods>(null)
@@ -66,13 +67,7 @@ function App() {
           thematicBreakPlugin(),
           tablePlugin(),
           imagePlugin({
-            imageUploadHandler: () => {
-              return Promise.resolve('https://picsum.photos/200/300')
-            },
-            imageAutocompleteSuggestions: [
-              'https://picsum.photos/200/300',
-              'https://picsum.photos/200',
-            ],
+            imageUploadHandler: uploadImage,
           }),
           diffSourcePlugin({ diffMarkdown: 'An older version', viewMode: 'rich-text' }),
           toolbarPlugin({
