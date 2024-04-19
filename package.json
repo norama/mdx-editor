@@ -15,6 +15,7 @@
   "dependencies": {
     "@mdxeditor/editor": "^2.18.0",
     "@supabase/supabase-js": "^2.42.3",
+    "dom-to-pdf": "^0.3.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-modern-drawer": "^1.2.2",

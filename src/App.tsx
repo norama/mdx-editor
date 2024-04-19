@@ -28,6 +28,9 @@ import PdfExportButton from './components/PdfExportButton'
 import { useRef, useState } from 'react'
 import CssEditor from 'components/CssEditor'
 import { uploadImage } from 'api/supabase'
+import DomToPdfButton from 'components/DomToPdfButton'
+
+const EDITOR_CONTENT_CLASSNAME = 'mdxeditor-rich-text-editor'
 
 function App() {
   const ref = useRef<MDXEditorMethods>(null)
@@ -35,6 +38,8 @@ function App() {
   const [cssEditorOpen, setCssEditorOpen] = useState(false)
 
   const markdown = `
+  <br />
+
   # Items
 
   * Item 1
@@ -85,6 +90,10 @@ function App() {
                 <button onClick={() => setCssEditorOpen(true)}>CSS</button>
                 <PdfExportButton
                   getMarkdown={() => ref.current?.getMarkdown() ?? ''}
+                  css={cssString}
+                />
+                <DomToPdfButton
+                  domNodeSelector={() => document.querySelector(`.${EDITOR_CONTENT_CLASSNAME}`)}
                   css={cssString}
                 />
               </>
