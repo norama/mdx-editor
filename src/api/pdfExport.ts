@@ -11,12 +11,13 @@ type TMatchResult = (RegExpMatchArray | null)[] | undefined
 
 const toCss = (attrs: TMatchResult, name: string) =>
   attrs
-    ?.filter((attr) => attr !== null)
-    .map(
-      (attr) => `
+    ?.map((attr) =>
+      attr
+        ? `
         img[${attr[0]}] {
           ${name}: ${attr[1]}px;
-        }`,
+        }`
+        : '',
     )
     .join('\n')
 
