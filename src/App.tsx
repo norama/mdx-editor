@@ -97,7 +97,10 @@ function App() {
         open={cssEditorOpen}
         css={cssString}
         onCssChange={(newCssString) => {
-          setCssString(newCssString)
+          // workaround to override MDX richtext editor predefined styles
+          setCssString(
+            newCssString.replaceAll('body {', 'body, body .mdxeditor-rich-text-editor {'),
+          )
           setCssEditorOpen(false)
         }}
       />

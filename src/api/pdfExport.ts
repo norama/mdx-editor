@@ -2,6 +2,12 @@
 
 const PDF_EXPORT_URL = 'https://md-to-pdf.fly.dev'
 
+const DEFAULT_CSS = `
+  body {
+    font-family: Roboto;
+  }
+`
+
 // https://www.regextester.com/103676
 const IMG_REGEX = /<img.*?src="(.*?)"[^>]+>/g
 const WIDTH_REGEX = /width="([0-9]*)"/i
@@ -37,13 +43,11 @@ const pdfExport = async (markdown: string, css = '') => {
   console.log('markdown', markdown)
   console.log('css', css)
 
-  css += imgCss(markdown)
+  css = DEFAULT_CSS + css + imgCss(markdown)
 
   const data = new URLSearchParams()
   data.append('markdown', markdown)
-  if (css) {
-    data.append('css', css)
-  }
+  data.append('css', css)
 
   const response = await fetch(PDF_EXPORT_URL, {
     method: 'POST',
