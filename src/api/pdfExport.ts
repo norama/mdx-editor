@@ -57,9 +57,7 @@ const pdfExport = async (markdown: string, css = '') => {
     body: data,
   })
 
-  console.log('response', response)
   const blob = await response.blob()
-  console.log('blob', blob)
   const pdfUrl = URL.createObjectURL(blob)
   window.open(pdfUrl, '_blank')?.focus()
 }
